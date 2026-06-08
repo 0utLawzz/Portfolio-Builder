@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "ydOzQfe2I6PpdMYzxqZOV"
+uri = "file://outlawz-labs-hostinger.tar.gz"
+type = "unspecified"
+title = "OUTLAWZ LABS™ — Hostinger Deploy Package"
