@@ -3,20 +3,28 @@ info:
   # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: OutLawZ Labs Portfolio API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: projects
+    description: Portfolio projects
+  - name: contact
+    description: Contact messages
+  - name: admin
+    description: Admin operations
+  - name: stats
+    description: Dashboard stats
+
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,6 +32,250 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /projects:
+    get:
+      operationId: listProjects
+      tags: [projects]
+      summary: List all projects
+      parameters:
+        - name: category
+          in: query
+          schema:
+            type: string
+        - name: search
+          in: query
+          schema:
+            type: string
+        - name: featured
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of projects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Project"
+    post:
+      operationId: createProject
+      tags: [projects]
+      summary: Create a project (admin)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+
+  /projects/featured:
+    get:
+      operationId: getFeaturedProjects
+      tags: [projects]
+      summary: Get featured projects for homepage
+      responses:
+        "200":
+          description: Featured projects
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Project"
+
+  /projects/{id}:
+    get:
+      operationId: getProject
+      tags: [projects]
+      summary: Get a single project
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Project
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+        "404":
+          description: Not found
+    patch:
+      operationId: updateProject
+      tags: [projects]
+      summary: Update a project (admin)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectUpdate"
+      responses:
+        "200":
+          description: Updated project
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+    delete:
+      operationId: deleteProject
+      tags: [projects]
+      summary: Delete a project (admin)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  /projects/by-slug/{slug}:
+    get:
+      operationId: getProjectBySlug
+      tags: [projects]
+      summary: Get a project by slug
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Project
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+        "404":
+          description: Not found
+
+  /contact:
+    post:
+      operationId: submitContact
+      tags: [contact]
+      summary: Submit a contact message
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContactInput"
+      responses:
+        "201":
+          description: Message submitted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContactMessage"
+    get:
+      operationId: listContactMessages
+      tags: [contact]
+      summary: List contact messages (admin)
+      responses:
+        "200":
+          description: List of messages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ContactMessage"
+
+  /contact/{id}:
+    delete:
+      operationId: deleteContactMessage
+      tags: [contact]
+      summary: Delete a contact message (admin)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  /admin/login:
+    post:
+      operationId: adminLogin
+      tags: [admin]
+      summary: Admin login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdminLoginInput"
+      responses:
+        "200":
+          description: Login success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminLoginResult"
+        "401":
+          description: Invalid credentials
+
+  /admin/logout:
+    post:
+      operationId: adminLogout
+      tags: [admin]
+      summary: Admin logout
+      responses:
+        "200":
+          description: Logged out
+
+  /admin/me:
+    get:
+      operationId: getAdminMe
+      tags: [admin]
+      summary: Get current admin session
+      responses:
+        "200":
+          description: Admin session info
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminSession"
+        "401":
+          description: Not authenticated
+
+  /stats:
+    get:
+      operationId: getStats
+      tags: [stats]
+      summary: Get portfolio stats for admin dashboard
+      responses:
+        "200":
+          description: Portfolio stats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PortfolioStats"
+
 components:
   schemas:
     HealthStatus:
@@ -34,3 +286,225 @@ components:
       required:
         - status
 
+    Project:
+      type: object
+      required:
+        - id
+        - title
+        - slug
+        - description
+        - status
+        - featured
+        - created_at
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        slug:
+          type: string
+        description:
+          type: string
+        long_description:
+          type: ["string", "null"]
+        problem:
+          type: ["string", "null"]
+        solution:
+          type: ["string", "null"]
+        tech_stack:
+          type: array
+          items:
+            type: string
+        category:
+          type: ["string", "null"]
+        status:
+          type: string
+          enum: [active, archived, wip]
+        cover_image:
+          type: ["string", "null"]
+        gallery:
+          type: array
+          items:
+            type: string
+        github_url:
+          type: ["string", "null"]
+        live_url:
+          type: ["string", "null"]
+        featured:
+          type: boolean
+        created_at:
+          type: string
+
+    ProjectInput:
+      type: object
+      required:
+        - title
+        - slug
+        - description
+        - status
+      properties:
+        title:
+          type: string
+        slug:
+          type: string
+        description:
+          type: string
+        long_description:
+          type: string
+        problem:
+          type: string
+        solution:
+          type: string
+        tech_stack:
+          type: array
+          items:
+            type: string
+        category:
+          type: string
+        status:
+          type: string
+          enum: [active, archived, wip]
+        cover_image:
+          type: string
+        gallery:
+          type: array
+          items:
+            type: string
+        github_url:
+          type: string
+        live_url:
+          type: string
+        featured:
+          type: boolean
+
+    ProjectUpdate:
+      type: object
+      properties:
+        title:
+          type: string
+        slug:
+          type: string
+        description:
+          type: string
+        long_description:
+          type: string
+        problem:
+          type: string
+        solution:
+          type: string
+        tech_stack:
+          type: array
+          items:
+            type: string
+        category:
+          type: string
+        status:
+          type: string
+          enum: [active, archived, wip]
+        cover_image:
+          type: string
+        gallery:
+          type: array
+          items:
+            type: string
+        github_url:
+          type: string
+        live_url:
+          type: string
+        featured:
+          type: boolean
+
+    ContactMessage:
+      type: object
+      required:
+        - id
+        - name
+        - email
+        - message
+        - created_at
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        message:
+          type: string
+        read:
+          type: boolean
+        created_at:
+          type: string
+
+    ContactInput:
+      type: object
+      required:
+        - name
+        - email
+        - message
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        message:
+          type: string
+
+    AdminLoginInput:
+      type: object
+      required:
+        - password
+      properties:
+        password:
+          type: string
+
+    AdminLoginResult:
+      type: object
+      required:
+        - success
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+
+    AdminSession:
+      type: object
+      required:
+        - authenticated
+      properties:
+        authenticated:
+          type: boolean
+
+    PortfolioStats:
+      type: object
+      required:
+        - totalProjects
+        - featuredProjects
+        - totalMessages
+        - unreadMessages
+        - projectsByCategory
+      properties:
+        totalProjects:
+          type: integer
+        featuredProjects:
+          type: integer
+        totalMessages:
+          type: integer
+        unreadMessages:
+          type: integer
+        projectsByCategory:
+          type: array
+          items:
+            $ref: "#/components/schemas/CategoryCount"
+
+    CategoryCount:
+      type: object
+      required:
+        - category
+        - count
+      properties:
+        category:
+          type: string
+        count:
+          type: integer

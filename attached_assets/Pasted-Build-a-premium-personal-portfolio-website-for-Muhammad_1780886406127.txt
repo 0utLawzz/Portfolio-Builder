@@ -1,0 +1,331 @@
+Build a premium personal portfolio website for Muhammad Nadeem (aka OutLawZ).
+
+This is NOT a freelancer portfolio.
+This is a portfolio of an AI Automation Specialist, SaaS Builder, and Systems Architect with 8-9 years of experience.
+
+Use the provided Neo-Brutalism Design System EXACTLY.
+Do not introduce any colors, shadows, gradients, radiuses, glassmorphism, or styling outside the design system.
+
+# BRAND
+
+Name:
+Muhammad Nadeem
+
+Brand:
+OUTLAWZ LABS™
+
+Role:
+AI Automation Specialist
+
+Headline:
+I Build Automation Systems, AI Workflows & SaaS Products That Eliminate Repetitive Work.
+
+Subheadline:
+From OCR pipelines and document processing to business software, AI agents, and workflow automation — I design systems that save time and scale operations.
+
+# WEBSITE GOAL
+
+When someone visits the site they should instantly understand:
+
+1. Who I am
+2. What I build
+3. My technical capability
+4. Real projects I have built
+5. How to contact me
+
+The website should feel like:
+A secret lab.
+An automation workshop.
+A builder's command center.
+
+Not a corporate agency.
+
+# TECH STACK
+
+Frontend:
+Next.js
+TypeScript
+Tailwind
+
+Backend:
+Supabase
+
+CMS:
+Supabase Database
+
+Admin:
+Password-protected dashboard
+
+Deployment:
+Vercel compatible
+
+# PAGES
+
+## HOME
+
+Hero section:
+
+Large Bebas Neue heading
+
+OUTLAWZ LABS™
+
+AI AUTOMATION SPECIALIST
+
+Buttons:
+VIEW PROJECTS
+CONTACT
+
+Add decorative stamps:
+
+AUTOMATION
+AI SYSTEMS
+SAAS BUILDER
+
+Stats section:
+
+8+ Years Experience
+
+50+ Projects Built
+
+Countless Hours Automated
+
+Multi-Stack Developer
+
+## ABOUT
+
+Story section explaining:
+
+Started as a developer.
+
+Moved into automation.
+
+Built systems for businesses.
+
+Focused on AI workflows, OCR systems, internal dashboards, business automation, SaaS platforms and process optimization.
+
+Skills Grid:
+
+Python
+Node.js
+TypeScript
+React
+Next.js
+Supabase
+PostgreSQL
+OpenAI
+Claude
+Gemini
+GitHub Actions
+Docker
+Automation
+OCR
+Web Scraping
+Workflow Design
+
+## PROJECTS
+
+Create project cards dynamically from database.
+
+Fields:
+
+title
+slug
+description
+tech_stack
+status
+cover_image
+gallery
+github_url
+live_url
+featured
+created_date
+
+Project categories:
+
+Automation
+AI
+SaaS
+OCR
+Internal Tools
+Web Apps
+
+Include search.
+
+Include filtering.
+
+Include project detail page.
+
+## PROJECT DETAIL PAGE
+
+Large screenshot
+
+Overview
+
+Problem
+
+Solution
+
+Technology Used
+
+Gallery
+
+Links
+
+## EXPERIENCE
+
+Timeline style.
+
+2017 — Started Development
+
+2019 — Automation Systems
+
+2021 — SaaS Products
+
+2023 — AI Workflows
+
+2025+ — Advanced Automation Architectures
+
+## CONTACT
+
+Email:
+[net2outlawzz@gmail.com](mailto:net2outlawzz@gmail.com)
+
+WhatsApp:
++92 332 5195959
+
+GitHub:
+https://github.com/0utLawzz
+
+Contact form:
+
+name
+email
+message
+
+Store messages in Supabase.
+
+# ADMIN PANEL
+
+Route:
+
+/admin
+
+Protected login.
+
+Features:
+
+Create Project
+
+Edit Project
+
+Delete Project
+
+Upload Screenshots
+
+Upload Gallery Images
+
+Manage Featured Projects
+
+View Contact Messages
+
+Dashboard Stats
+
+# SPECIAL HOMEPAGE SECTIONS
+
+## WHAT I BUILD
+
+Cards:
+
+AI Agents
+
+Workflow Automation
+
+OCR Systems
+
+Internal Business Software
+
+SaaS Platforms
+
+Custom Integrations
+
+## FEATURED PROJECTS
+
+Pull featured projects automatically.
+
+## BUILD PROCESS
+
+Discovery
+
+Architecture
+
+Prototype
+
+Automation
+
+Deployment
+
+Optimization
+
+## TERMINAL SECTION
+
+Fake terminal component.
+
+Rotating commands:
+
+> building automation...
+> parsing documents...
+> creating workflows...
+> deploying systems...
+> scaling operations...
+
+# SEO
+
+Generate complete SEO.
+
+Meta title.
+
+Open Graph.
+
+Twitter cards.
+
+Schema.org Person markup.
+
+# PERFORMANCE
+
+95+ Lighthouse.
+
+Responsive.
+
+Mobile optimized.
+
+Image optimization.
+
+# DESIGN RULES
+
+STRICTLY FOLLOW THE PROVIDED NEO-BRUTALISM DESIGN SYSTEM.
+
+No gradients.
+
+No blur.
+
+No glassmorphism.
+
+No rounded modern UI.
+
+No floating cards without borders.
+
+All shadows hard offset.
+
+All buttons uppercase.
+
+Navbar always black.
+
+Every visible element must have a border.
+
+Follow the design system 100%.
+
+# FUTURE READY
+
+Structure database and codebase so new projects can be added from admin panel without touching code.
+
+The portfolio should look like a serious automation engineer's command center rather than a freelancer template.
