@@ -18,6 +18,8 @@ tags:
     description: Admin operations
   - name: stats
     description: Dashboard stats
+  - name: github
+    description: GitHub integration
 
 paths:
   /healthz:
@@ -276,6 +278,21 @@ paths:
               schema:
                 $ref: "#/components/schemas/PortfolioStats"
 
+  /github:
+    get:
+      operationId: getGitHubData
+      tags: [github]
+      summary: Get GitHub profile and public repos
+      responses:
+        "200":
+          description: GitHub profile and repos
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GitHubData"
+        "502":
+          description: GitHub API error
+
 components:
   schemas:
     HealthStatus:
@@ -508,3 +525,99 @@ components:
           type: string
         count:
           type: integer
+
+    GitHubRepo:
+      type: object
+      required:
+        - id
+        - name
+        - full_name
+        - html_url
+        - description
+        - stargazers_count
+        - forks_count
+        - language
+        - updated_at
+        - topics
+        - fork
+        - private
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        full_name:
+          type: string
+        html_url:
+          type: string
+        description:
+          type: string
+          nullable: true
+        stargazers_count:
+          type: integer
+        forks_count:
+          type: integer
+        language:
+          type: string
+          nullable: true
+        updated_at:
+          type: string
+        topics:
+          type: array
+          items:
+            type: string
+        fork:
+          type: boolean
+        private:
+          type: boolean
+        homepage:
+          type: string
+          nullable: true
+        open_issues_count:
+          type: integer
+        size:
+          type: integer
+
+    GitHubProfile:
+      type: object
+      required:
+        - login
+        - html_url
+        - public_repos
+        - followers
+        - following
+        - bio
+        - avatar_url
+        - name
+      properties:
+        login:
+          type: string
+        name:
+          type: string
+          nullable: true
+        bio:
+          type: string
+          nullable: true
+        avatar_url:
+          type: string
+        html_url:
+          type: string
+        public_repos:
+          type: integer
+        followers:
+          type: integer
+        following:
+          type: integer
+
+    GitHubData:
+      type: object
+      required:
+        - profile
+        - repos
+      properties:
+        profile:
+          $ref: "#/components/schemas/GitHubProfile"
+        repos:
+          type: array
+          items:
+            $ref: "#/components/schemas/GitHubRepo"

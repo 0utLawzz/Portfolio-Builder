@@ -14,6 +14,7 @@ import AdminDashboard from "@/pages/admin/dashboard";
 import AdminProjects from "@/pages/admin/projects-list";
 import AdminProjectForm from "@/pages/admin/project-form";
 import AdminMessages from "@/pages/admin/messages";
+import GitHubPage from "@/pages/github";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ function Router() {
       <Route path="/projects/:slug" component={ProjectDetail} />
       <Route path="/experience" component={Experience} />
       <Route path="/contact" component={Contact} />
+      <Route path="/github" component={GitHubPage} />
       <Route path="/admin" component={AdminLogin} />
       <Route path="/admin/dashboard" component={AdminDashboard} />
       <Route path="/admin/projects" component={AdminProjects} />

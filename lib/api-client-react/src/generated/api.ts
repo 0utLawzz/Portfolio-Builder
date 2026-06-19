@@ -25,6 +25,7 @@ import type {
   AdminSession,
   ContactInput,
   ContactMessage,
+  GitHubData,
   HealthStatus,
   ListProjectsParams,
   PortfolioStats,
@@ -1151,6 +1152,83 @@ export function useGetStats<TData = Awaited<ReturnType<typeof getStats>>, TError
  ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
 
   const queryOptions = getGetStatsQueryOptions(options)
+
+  const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
+
+  return { ...query, queryKey: queryOptions.queryKey };
+}
+
+
+
+
+
+
+
+export const getGetGitHubDataUrl = () => {
+
+
+
+
+  return `/api/github`
+}
+
+/**
+ * @summary Get GitHub profile and public repos
+ */
+export const getGitHubData = async ( options?: RequestInit): Promise<GitHubData> => {
+
+  return customFetch<GitHubData>(getGetGitHubDataUrl(),
+  {
+    ...options,
+    method: 'GET'
+
+
+  }
+);}
+
+
+
+
+
+export const getGetGitHubDataQueryKey = () => {
+    return [
+    `/api/github`
+    ] as const;
+    }
+
+
+export const getGetGitHubDataQueryOptions = <TData = Awaited<ReturnType<typeof getGitHubData>>, TError = ErrorType<void>>( options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getGitHubData>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+) => {
+
+const {query: queryOptions, request: requestOptions} = options ?? {};
+
+  const queryKey =  queryOptions?.queryKey ?? getGetGitHubDataQueryKey();
+
+
+
+    const queryFn: QueryFunction<Awaited<ReturnType<typeof getGitHubData>>> = ({ signal }) => getGitHubData({ signal, ...requestOptions });
+
+
+
+
+
+   return  { queryKey, queryFn, ...queryOptions} as UseQueryOptions<Awaited<ReturnType<typeof getGitHubData>>, TError, TData> & { queryKey: QueryKey }
+}
+
+export type GetGitHubDataQueryResult = NonNullable<Awaited<ReturnType<typeof getGitHubData>>>
+export type GetGitHubDataQueryError = ErrorType<void>
+
+
+/**
+ * @summary Get GitHub profile and public repos
+ */
+
+export function useGetGitHubData<TData = Awaited<ReturnType<typeof getGitHubData>>, TError = ErrorType<void>>(
+  options?: { query?:UseQueryOptions<Awaited<ReturnType<typeof getGitHubData>>, TError, TData>, request?: SecondParameter<typeof customFetch>}
+
+ ):  UseQueryResult<TData, TError> & { queryKey: QueryKey } {
+
+  const queryOptions = getGetGitHubDataQueryOptions(options)
 
   const query = useQuery(queryOptions) as  UseQueryResult<TData, TError> & { queryKey: QueryKey };
 

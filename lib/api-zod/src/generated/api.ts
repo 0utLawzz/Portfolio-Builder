@@ -265,3 +265,37 @@ export const GetStatsResponse = zod.object({
 })
 
 
+/**
+ * @summary Get GitHub profile and public repos
+ */
+export const GetGitHubDataResponse = zod.object({
+  "profile": zod.object({
+  "login": zod.string(),
+  "name": zod.string().nullable(),
+  "bio": zod.string().nullable(),
+  "avatar_url": zod.string(),
+  "html_url": zod.string(),
+  "public_repos": zod.number(),
+  "followers": zod.number(),
+  "following": zod.number()
+}),
+  "repos": zod.array(zod.object({
+  "id": zod.number(),
+  "name": zod.string(),
+  "full_name": zod.string(),
+  "html_url": zod.string(),
+  "description": zod.string().nullable(),
+  "stargazers_count": zod.number(),
+  "forks_count": zod.number(),
+  "language": zod.string().nullable(),
+  "updated_at": zod.string(),
+  "topics": zod.array(zod.string()),
+  "fork": zod.boolean(),
+  "private": zod.boolean(),
+  "homepage": zod.string().nullish(),
+  "open_issues_count": zod.number().optional(),
+  "size": zod.number().optional()
+}))
+})
+
+
