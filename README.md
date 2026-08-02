@@ -1,17 +1,23 @@
 # Portfolio Builder
 
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white)
+![Automation](https://img.shields.io/badge/Automation-Custom-blue)
+![Status](https://img.shields.io/badge/Status-Active-success)
+
 ![Social Preview](./social-preview.png)
 
+> Modern portfolio builder for creating clean, professional personal or business portfolio websites. Built with Node.js / TypeScript and designed for automation-friendly workflows.
 
+## Topics / Keywords
+`portfolio-builder` `portfolio` `node-js` `typescript` `automation` `clean` `web` `custom-automation`
 
-## Description
-Portfolio-Builder project repository, managed via automated tooling.
-
-**Website (Deploy Url):** *(Insert Deploy URL here)*
-
-**Topics:** portfolio-builder node.js automation clean
-
-Welcome to **Portfolio-Builder**. This project was generated as part of a mass-processing script.
+## Features
+- Fast portfolio generation
+- Clean and modern design focus
+- Automation-ready structure
+- Easy to customize and deploy
 
 ## Installation
 
@@ -21,11 +27,13 @@ npm install
 yarn install
 ```
 
-## Usage
-Explain how to run or use the project here.
+## Author
+**Nadeem (OutLawZ)**  
+Custom Automation Specialist  
 
-## Changelog
-- **2026-06-28**: Initial README generation and mass cleanup.
+📧 Contact: [net2outlawzz@gmail.com](mailto:net2outlawzz@gmail.com)  
+🔗 GitHub: [0utLawzz](https://github.com/0utLawzz)
 
-## Contributing
-Contributions are welcome. Please open an issue or submit a pull request.
+---
+
+*Need a custom portfolio system or web automation tools? Reach out.*
