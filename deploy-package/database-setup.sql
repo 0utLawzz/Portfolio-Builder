@@ -31,46 +31,25 @@ CREATE TABLE IF NOT EXISTS contact_messages (
   email      TEXT NOT NULL,
   message    TEXT NOT NULL,
   read       BOOLEAN NOT NULL DEFAULT false,
-  created_at TIMESTAMP NOT NULL DEFAULT NOW()
+  created_at  TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
--- Optional: seed sample projects (remove if you want to start clean)
-INSERT INTO projects (title, slug, description, long_description, problem, solution, tech_stack, category, status, featured)
+-- Seed: Brandex Drive Parser only (as requested)
+INSERT INTO projects (title, slug, description, long_description, problem, solution, tech_stack, category, status, cover_image, github_url, live_url, featured)
 VALUES
 (
-  'AI Document OCR Pipeline',
-  'ai-document-ocr-pipeline',
-  'Automated document parsing system that extracts structured data from PDFs, invoices, and forms using AI-powered OCR.',
-  'A production OCR pipeline that processes thousands of documents per day.',
-  'A logistics company was manually processing 500+ invoices per day.',
-  'Built an AI-powered OCR pipeline that processes documents in under 30 seconds with 98%+ accuracy.',
-  '["Python","OpenAI Vision","PostgreSQL","FastAPI","Docker","Redis"]',
-  'OCR',
-  'active',
-  true
-),
-(
-  'Business Workflow Automation Suite',
-  'workflow-automation-suite',
-  'End-to-end workflow automation platform connecting CRM, email, Slack, and databases.',
-  'A comprehensive workflow automation platform that eliminates manual handoffs.',
-  'A SaaS company had a 14-step customer onboarding process requiring manual action at every step.',
-  'Designed a workflow engine that automates the entire onboarding sequence.',
-  '["Node.js","TypeScript","HubSpot API","AWS","Slack API","PostgreSQL"]',
+  'Brandex Drive Parser',
+  'brandex-drive-parser',
+  'A smart Google Drive folder parser that extracts, categorizes, and exports trademark case data to Google Sheets or local Excel/CSV files.',
+  'Drive-Data is a Python CLI + GUI tool built for trademark legal teams. It recursively scans client/consultant folders, classifies documents with 13+ regex rules (TM-1, TM-48, EXAM, ACK, OPPO, NTN…), and exports clean records to Google Sheets or local Excel/CSV — with no duplicate filtering so every file is captured.',
+  'Trademark teams were manually sorting hundreds of case folders and updating Sheets by hand, leading to missed documents and hours of repetitive work.',
+  'Built a single-script automation with interactive CLI, deep/fast scanning modes, dynamic rules manager, and dual export (local + Sheets) that turns a multi-hour process into a few minutes.',
+  '["Python","pandas","gspread","openpyxl","regex","Google Sheets API","Google Drive API"]',
   'Automation',
   'active',
-  true
-),
-(
-  'AI Agent for Lead Research',
-  'ai-lead-research-agent',
-  'Autonomous AI agent that researches leads, scrapes company data, and generates personalized outreach.',
-  'An autonomous AI sales research agent that replaces hours of manual research.',
-  'Sales teams waste 2-3 hours per day doing manual lead research.',
-  'Built a multi-step AI agent using LangChain + Claude that autonomously researches leads.',
-  '["Python","Claude","LangChain","Playwright","OpenAI","Supabase"]',
-  'AI',
-  'active',
+  'https://0utlawzz.github.io/Brandex-Drive-Parser/',
+  'https://github.com/0utLawzz/Brandex-Drive-Parser',
+  'https://0utlawzz.github.io/Brandex-Drive-Parser/',
   true
 )
 ON CONFLICT (slug) DO NOTHING;
