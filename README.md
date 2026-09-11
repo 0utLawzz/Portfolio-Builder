@@ -6,8 +6,6 @@
 ![Automation](https://img.shields.io/badge/Automation-Custom-blue)
 ![Status](https://img.shields.io/badge/Status-Active-success)
 
-![Social Preview](./social-preview.png)
-
 > Modern portfolio builder for creating clean, professional personal or business portfolio websites. Built with Node.js / TypeScript and designed for automation-friendly workflows.
 
 ## Topics / Keywords
