@@ -4,6 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
+// Defaults for local Windows/Mac; Replit can still override via env
 const rawPort = process.env.PORT || "5173";
 const port = Number(rawPort);
 
@@ -52,6 +53,14 @@ export default defineConfig({
     allowedHosts: true,
     fs: {
       strict: true,
+    },
+    // Local dev: forward /api/* to live portfolio API
+    proxy: {
+      "/api": {
+        target: "https://outlawz-portfolio-api.vercel.app",
+        changeOrigin: true,
+        secure: true,
+      },
     },
   },
   preview: {
