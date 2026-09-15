@@ -63,7 +63,15 @@ export default function Projects() {
 
   const merged: CardProject[] = useMemo(() => {
     const db = dbProjects ?? [];
-    const repos = ghData?.repos ?? [];
+    // Most recently updated first
+    const repos = [...(ghData?.repos ?? [])].sort((a, b) =>
+      (b.updated_at || "").localeCompare(a.updated_at || "")
+    );
+    // Auto-feature the 8 most recent public repos
+    const FEATURED_COUNT = 8;
+    const recentFeaturedNames = new Set(
+      repos.slice(0, FEATURED_COUNT).map((r) => r.name.toLowerCase())
+    );
 
     const dbBySlug = new Map(db.map((p) => [p.slug, p]));
     const dbByGithubName = new Map<string, (typeof db)[0]>();
@@ -81,6 +89,7 @@ export default function Projects() {
 
     for (const r of repos) {
       const slug = slugify(r.name);
+      const isRecentFeatured = recentFeaturedNames.has(r.name.toLowerCase());
       const match = dbByGithubName.get(r.name.toLowerCase()) || dbBySlug.get(slug);
       if (match) {
         usedDbIds.add(match.id);
@@ -93,7 +102,7 @@ export default function Projects() {
           category: match.category || guessCategory(r.topics || [], r.language),
           status: match.status || "active",
           cover_image: match.cover_image,
-          featured: match.featured,
+          featured: match.featured || isRecentFeatured,
           github_url: match.github_url || r.html_url,
           live_url: match.live_url || r.homepage,
           source: "db",
@@ -108,7 +117,7 @@ export default function Projects() {
           category: guessCategory(r.topics || [], r.language),
           status: "active",
           cover_image: null,
-          featured: false,
+          featured: isRecentFeatured,
           github_url: r.html_url,
           live_url: r.homepage,
           source: "github",
@@ -135,6 +144,7 @@ export default function Projects() {
       }
     }
 
+    // Featured first, then keep GitHub recency order within groups
     cards.sort((a, b) => {
       if (a.featured !== b.featured) return a.featured ? -1 : 1;
       return a.title.localeCompare(b.title);
