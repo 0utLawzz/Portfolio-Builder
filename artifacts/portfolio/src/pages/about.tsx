@@ -40,15 +40,23 @@ export default function About() {
       <Navbar />
 
       {/* Header */}
-      <section className="bg-black border-b-[3px] border-white py-20 px-6">
-        <div className="max-w-7xl mx-auto">
-          <h1 className="text-6xl md:text-9xl font-bold text-white uppercase" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
-            ABOUT
-          </h1>
-          <div className="w-24 h-[3px] bg-[#FFE600] mt-4" />
-          <p className="text-gray-400 font-mono text-sm mt-4 max-w-xl">
-            AI Automation Specialist. Systems Architect. SaaS Builder. 8+ years of building things that work.
-          </p>
+      <section className="bg-black border-b-[3px] border-white py-20 px-6 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: "linear-gradient(90deg,#FFE600 1px,transparent 1px),linear-gradient(#FFE600 1px,transparent 1px)", backgroundSize: "40px 40px" }} />
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center gap-10 relative z-10">
+          <div className="shrink-0">
+            <div className="border-[3px] border-[#FFE600] p-2 bg-black shadow-[6px_6px_0_#FFE600]">
+              <img src="/outlawz-logo.png" alt="OutLawZ logo" className="w-36 h-36 md:w-44 md:h-44 object-contain" />
+            </div>
+          </div>
+          <div>
+            <h1 className="text-6xl md:text-9xl font-bold text-white uppercase" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
+              ABOUT
+            </h1>
+            <div className="w-24 h-[3px] bg-[#FFE600] mt-4" />
+            <p className="text-gray-400 font-mono text-sm mt-4 max-w-xl">
+              AI Automation Specialist. Systems Architect. SaaS Builder. 8+ years of building things that work.
+            </p>
+          </div>
         </div>
       </section>
 
