@@ -33,21 +33,39 @@ export default function ProjectCard({ project, showFeaturedBadge }: Props) {
   return (
     <Link href={`/projects/${project.slug}`} data-testid={`card-project-${project.id}`}>
       <div className="border-[3px] border-black bg-[#F5F0E8] shadow-[6px_6px_0_#0A0A0A] hover:shadow-[8px_8px_0_#FFE600] hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all cursor-pointer group">
-        {project.cover_image ? (
-          <div className="border-b-[3px] border-black overflow-hidden h-48">
-            <img
-              src={project.cover_image}
-              alt={project.title}
-              className="w-full h-full object-cover"
-            />
-          </div>
-        ) : (
-          <div className="border-b-[3px] border-black h-48 bg-black flex items-center justify-center">
-            <span className="font-mono text-[#FFE600] text-lg uppercase tracking-widest opacity-60">
-              {project.category ?? "PROJECT"}
-            </span>
-          </div>
-        )}
+        {(() => {
+          let img = project.cover_image || null;
+          if (!img && project.slug) {
+            const repoName = project.title.replace(/\s+/g, "-");
+            img = `https://opengraph.githubassets.com/1/0utLawzz/${encodeURIComponent(repoName)}`;
+          }
+          return img ? (
+            <div className="border-b-[3px] border-black overflow-hidden h-48 bg-black">
+              <img
+                src={img}
+                alt={project.title}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  const el = e.target as HTMLImageElement;
+                  el.style.display = "none";
+                }}
+              />
+            </div>
+          ) : (
+            <div className="border-b-[3px] border-black h-48 bg-black flex items-center justify-center relative overflow-hidden">
+              <div
+                className="absolute inset-0 opacity-25"
+                style={{
+                  backgroundImage:
+                    "linear-gradient(135deg, #FFE600 0%, transparent 35%, #FFE600 100%)",
+                }}
+              />
+              <span className="font-mono text-[#FFE600] text-lg uppercase tracking-widest relative z-10">
+                {project.category ?? "PROJECT"}
+              </span>
+            </div>
+          );
+        })()}
 
         <div className="p-5">
           <div className="flex justify-between items-start mb-3">
