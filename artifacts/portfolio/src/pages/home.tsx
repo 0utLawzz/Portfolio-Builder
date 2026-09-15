@@ -1,9 +1,9 @@
 import { Link } from "wouter";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import Navbar from "@/components/navbar";
 import Terminal from "@/components/terminal";
 import ProjectCard from "@/components/project-card";
-import { useGetFeaturedProjects } from "@workspace/api-client-react";
+import { useGetFeaturedProjects, useGetGitHubData, getGetGitHubDataQueryKey } from "@workspace/api-client-react";
 
 const services = [
   { title: "AI Agents", desc: "Autonomous systems that reason, decide, and act on your behalf." },
@@ -35,7 +35,55 @@ export default function Home() {
     document.title = "OUTLAWZ LABS™ | AI Automation Specialist";
   }, []);
 
-  const { data: featured, isLoading } = useGetFeaturedProjects();
+  const { data: dbFeatured, isLoading: dbLoading } = useGetFeaturedProjects();
+  const { data: ghData, isLoading: ghLoading } = useGetGitHubData({
+    query: { queryKey: getGetGitHubDataQueryKey(), staleTime: 5 * 60 * 1000 },
+  });
+  const isLoading = dbLoading || ghLoading;
+
+  const featured = useMemo(() => {
+    const repos = [...(ghData?.repos ?? [])].sort((a, b) =>
+      (b.updated_at || "").localeCompare(a.updated_at || "")
+    );
+    const top = repos.slice(0, 6);
+    const db = dbFeatured ?? [];
+    const dbByName = new Map<string, (typeof db)[0]>();
+    for (const p of db) {
+      if (p.github_url) {
+        try {
+          const name = new URL(p.github_url).pathname.split("/").filter(Boolean)[1];
+          if (name) dbByName.set(name.toLowerCase(), p);
+        } catch {}
+      }
+      dbByName.set(p.slug, p);
+    }
+    return top.map((r) => {
+      const slug = r.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+      const match = dbByName.get(r.name.toLowerCase()) || dbByName.get(slug);
+      if (match) {
+        return {
+          ...match,
+          cover_image:
+            match.cover_image ||
+            `https://opengraph.githubassets.com/1/0utLawzz/${r.name}`,
+          featured: true,
+        };
+      }
+      return {
+        id: r.id,
+        title: r.name.replace(/-/g, " "),
+        slug,
+        description: r.description || "GitHub project",
+        tech_stack: r.language ? [r.language] : [],
+        category: r.language || "Project",
+        status: "active",
+        cover_image: `https://opengraph.githubassets.com/1/0utLawzz/${r.name}`,
+        featured: true,
+        github_url: r.html_url,
+        live_url: r.homepage,
+      };
+    });
+  }, [dbFeatured, ghData]);
 
   return (
     <div className="min-h-screen bg-[#F5F0E8] text-[#0A0A0A]" style={{ fontFamily: "'Space Mono', monospace" }}>
@@ -152,7 +200,7 @@ export default function Home() {
                 <div key={i} className="border-[3px] border-black h-80 bg-gray-200 animate-pulse" />
               ))}
             </div>
-          ) : Array.isArray(featured) && featured.length > 0 ? (
+          ) : featured && featured.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {featured.map((p) => (
                 <ProjectCard key={p.id} project={p} />
