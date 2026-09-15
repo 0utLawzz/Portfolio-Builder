@@ -42,7 +42,7 @@ router.get("/github", async (req, res): Promise<void> => {
       return;
     }
 
-    const profile = await profileRes.json();
+    const profile = (await profileRes.json()) as Record<string, any>;
     const allRepos = await reposRes.json();
 
     const repos = (allRepos as Array<Record<string, unknown>>)
