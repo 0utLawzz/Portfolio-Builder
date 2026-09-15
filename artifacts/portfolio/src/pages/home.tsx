@@ -152,7 +152,7 @@ export default function Home() {
                 <div key={i} className="border-[3px] border-black h-80 bg-gray-200 animate-pulse" />
               ))}
             </div>
-          ) : featured && featured.length > 0 ? (
+          ) : Array.isArray(featured) && featured.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {featured.map((p) => (
                 <ProjectCard key={p.id} project={p} />
