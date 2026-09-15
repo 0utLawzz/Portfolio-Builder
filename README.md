@@ -8,9 +8,6 @@
 
 > Modern portfolio builder for creating clean, professional personal or business portfolio websites. Built with Node.js / TypeScript and designed for automation-friendly workflows.
 
-## Topics / Keywords
-`portfolio-builder` `portfolio` `node-js` `typescript` `automation` `clean` `web` `custom-automation`
-
 ## Features
 - Fast portfolio generation
 - Clean and modern design focus
