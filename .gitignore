@@ -1,4 +1,4 @@
-# See https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
+# See https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
 # compiled output
 dist
@@ -52,3 +52,15 @@ Thumbs.db
 .env
 .env.*
 !.env.example
+
+# Package manager noise (this repo uses pnpm)
+package-lock.json
+yarn.lock
+
+# Local / deploy artifacts
+*.tar.gz
+*.bak
+**/api-built/
+**/api-dist/
+**/api-run/
+.outlawz/
