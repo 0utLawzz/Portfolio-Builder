@@ -1,0 +1,10 @@
+{
+  "buildCommand": "pnpm --filter @workspace/portfolio build",
+  "outputDirectory": "artifacts/portfolio/dist/public",
+  "installCommand": "pnpm install",
+  "framework": null,
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "https://outlawz-portfolio-api.vercel.app/api/$1" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
