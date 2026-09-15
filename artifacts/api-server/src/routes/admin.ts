@@ -18,7 +18,7 @@ router.post("/admin/login", async (req, res): Promise<void> => {
     return;
   }
 
-  const session = req.session as Record<string, unknown>;
+  const session = req.session as unknown as Record<string, unknown>;
   session[SESSION_KEY] = true;
   res.json({ success: true, message: "Logged in" });
 });
@@ -30,7 +30,7 @@ router.post("/admin/logout", async (req, res): Promise<void> => {
 });
 
 router.get("/admin/me", async (req, res): Promise<void> => {
-  const session = req.session as Record<string, unknown>;
+  const session = req.session as unknown as Record<string, unknown>;
   const authenticated = session[SESSION_KEY] === true;
   if (!authenticated) {
     res.status(401).json({ authenticated: false });
