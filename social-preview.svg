@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640">
+  <rect width="1280" height="640" fill="#0A0A0A"/>
+  <rect x="16" y="16" width="1248" height="608" fill="none" stroke="#FFE600" stroke-width="6"/>
+  <rect x="28" y="28" width="1224" height="584" fill="none" stroke="#FFFFFF" stroke-width="3"/>
+  <rect x="40" y="40" width="36" height="36" fill="#FFE600"/>
+  <rect x="1204" y="40" width="36" height="36" fill="#FFE600"/>
+  <rect x="40" y="564" width="36" height="36" fill="#FFE600"/>
+  <rect x="1204" y="564" width="36" height="36" fill="#FFE600"/>
+  <rect x="48" y="120" width="16" height="400" fill="#FFE600"/>
+  <text x="90" y="200" font-family="Arial Black, Helvetica, sans-serif" font-size="64" font-weight="900" fill="#FFFFFF">OUTLAWZ LABS™</text>
+  <rect x="90" y="220" width="340" height="6" fill="#FFE600"/>
+  <text x="90" y="290" font-family="Arial, Helvetica, sans-serif" font-size="36" font-weight="700" fill="#FFE600">PORTFOLIO BUILDER</text>
+  <text x="90" y="350" font-family="Courier New, monospace" font-size="20" fill="#F5F0E8">Auto-sync GitHub repos  ·  Case studies  ·  Neon + Vercel</text>
+  <rect x="90" y="400" width="300" height="56" fill="none" stroke="#FFE600" stroke-width="3"/>
+  <rect x="96" y="406" width="288" height="44" fill="#FFE600"/>
+  <text x="120" y="436" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#0A0A0A">NEO-BRUTALIST  ·  LIVE</text>
+  <polygon points="980,160 1180,160 1120,480 920,480" fill="#FFE600"/>
+  <polygon points="1000,180 1160,180 1110,460 950,460" fill="#0A0A0A"/>
+  <text x="1015" y="320" font-family="Arial Black, Helvetica, sans-serif" font-size="64" fill="#FFE600">21+</text>
+  <text x="1015" y="360" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">PROJECTS</text>
+</svg>
